@@ -450,7 +450,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     singularName: 'author';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     avatar: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
@@ -481,7 +481,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     singularName: 'category';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
@@ -547,6 +547,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
   };
   attributes: {
     author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
+    catagory: Schema.Attribute.Relation<'manyToOne', 'api::post.post'>;
     content: Schema.Attribute.RichText;
     cover: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
@@ -557,8 +558,9 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
       Schema.Attribute.Private;
-    lug: Schema.Attribute.UID<'title'>;
+    posts: Schema.Attribute.Relation<'oneToMany', 'api::post.post'>;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;

@@ -28,7 +28,7 @@
     "date": {
       "type": "date"
     },
-    "lug": {
+    "slug": {
       "type": "uid",
       "targetField": "title"
     },
@@ -37,6 +37,18 @@
       "relation": "manyToOne",
       "target": "api::author.author",
       "inversedBy": "posts"
+    },
+    "catagory": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::post.post",
+      "inversedBy": "posts"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post",
+      "mappedBy": "catagory"
     }
   }
 }
